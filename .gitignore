@@ -32,3 +32,8 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Marko's specific additions
+.env
+.tmp
+node_modules

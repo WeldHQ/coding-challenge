@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "mutantdino.resourcemonitor",
+        "mikestead.dotenv",
+        "eamodio.gitlens",
+        "AbhijoyBasak.nestjs-files"
+    ]
+}

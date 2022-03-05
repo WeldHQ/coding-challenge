@@ -1,0 +1,85 @@
+services:
+
+  worker:
+    container_name: weld_worker
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    command: ${WORKER_CMD}
+    volumes:
+      - ./:/app
+    networks:
+      - weld
+
+  # data-streams:
+  #   container_name: weld_data_streams
+  #   build:
+  #     context: .
+  #     dockerfile: dev.Dockerfile
+  #   command: ${DATA_STREAMS_CMD}
+  #   volumes:
+  #     - ./:/app
+  #   networks:
+  #     - weld
+
+  minio:
+    image: minio/minio
+    container_name: weld_minio
+    restart: on-failure
+    ports:
+      - ${MINIO_PORT}:9000
+      - ${MINIO_CONSOLE_PORT}:9001
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "curl", "http://weld_minio:9000" ]
+      interval: 30s
+      timeout: 10s
+      start_period: 15s
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_datastore:/data
+    networks:
+      - weld
+
+  postgres:
+    image: postgres:alpine
+    container_name: weld_postgres
+    restart: on-failure
+    environment:
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRESQL_DB: ${POSTGRESQL_DB}
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "echo",
+          "'SELECT 1'",
+          "|",
+          "psql",
+          "--host=127.0.0.1",
+          "--username=${POSTGRESQL_USER}",
+          "-w",
+          "--dbname=${POSTGRESQL_DB}",
+          "--quiet",
+          "--no-align",
+          "--tuples-only"
+        ]
+      interval: 30s
+      timeout: 10s
+      start_period: 15s
+    volumes:
+      - postgres_datastore:/var/lib/postgresql/data
+    networks:
+      - weld
+
+networks:
+  weld:
+    name: weld
+    driver: bridge
+
+volumes:
+  postgres_datastore:
+  minio_datastore:
