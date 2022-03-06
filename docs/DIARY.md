@@ -9,14 +9,9 @@
 I've found it useful to write down a very simple shortform work diary & Notes. It also helps me to pick up where I've left off when I work on fragmented hours and with collecting links to resources that are easy to misplace.
 
 ## Value For You
-**Disclaimer: It's very raw on purpose. Not something I'd normally keep versioned.**
-
-Since this is an interview, and interviewees like me tend to do it in weird hours or a very fragmented manner, it is important for the interwiever to also understand how I spend my time.
-
-One could argue that this is what commit comments are for, but we all know that they present only a part of the picture - we stare at code/docs for much longer than we type. What you can observe here is the actual, raw, learning and discovery process.
+No value whatsoever. Go read the [RFC](./RFC.md) instead.
 
 ## Notes
-
   - Put on a singalong [playlist](https://youtube-playlist-randomizer.bitbucket.io/?pid=PLPX6lu9kG1JXtN3eWYd5AaNOpJG2GqeCP&autostart)
   - Download the project, read through all docs, get acquainted with NestJS fundamentals.
     - Look at prior art from forks. Might be useful to figure out the details around setting up tests, logging etc whenever I get stuck or need to look up coding style or idiomaticism.
@@ -40,10 +35,19 @@ One could argue that this is what commit comments are for, but we all know that 
     - I got stuck in a loop there. There are a lot of unknowns and not a lot of constraints, so i wrote an essay on alternative solutions. Never feels good.
   - Started by making the environment work. On my current setup, I exclusively develop within containers so I have to add node dockerfile and setup scripts.
     - Ha, had to add `node_modules/.bin` to the path.
+    - For some reason that eludes me, node claims that port 3000 is taken.
+      - `lsof -i :3000` turns out the nest app tries to take the same port 2x.
+      - Thats because I didn't have the correct setup for the microservice config
+  - Finished the RFC. Did some Figma drawings, was quite fun.
+    - Spend like 5 hours on that. Need sleep.
+  
 
 
 TODOS:
+  - use nestjs config or a set of consts
+  - parametrize ports
+  - figure out how logging works
+  - create external api endpoints
   - Postman export
   - Swagger api docs
-  - 
-
+  - ...
