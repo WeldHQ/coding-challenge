@@ -1,4 +1,4 @@
-import { Logger, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,11 +13,10 @@ import { WorkerFactory } from './app.worker.factory';
   providers: [
     AppService,
     Config,
-    Logger,
     {
       provide: 'WORKER',
       useFactory: WorkerFactory.create,
-      inject: [Config, Logger],
+      inject: [Config],
     }
   ]
 })
