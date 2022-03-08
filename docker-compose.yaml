@@ -5,22 +5,14 @@ services:
     build:
       context: .
       dockerfile: dev.Dockerfile
-    command: ${WORKER_CMD}
+    command: "tail -f /dev/null"
+    environment:
+      WORKER_HOST: ${WORKER_HOST}
+      WORKER_PORT: ${WORKER_PORT}
     volumes:
       - ./:/app
     networks:
       - weld
-
-  # data-streams:
-  #   container_name: weld_data_streams
-  #   build:
-  #     context: .
-  #     dockerfile: dev.Dockerfile
-  #   command: ${DATA_STREAMS_CMD}
-  #   volumes:
-  #     - ./:/app
-  #   networks:
-  #     - weld
 
   minio:
     image: minio/minio
