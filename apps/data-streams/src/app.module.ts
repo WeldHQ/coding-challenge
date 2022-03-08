@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Config } from './app.config.service';
+import { WorkerFactory } from './app.worker.factory';
 
 @Module({
   imports: [
@@ -13,6 +14,11 @@ import { Config } from './app.config.service';
     AppService,
     Config,
     Logger,
+    {
+      provide: 'WORKER',
+      useFactory: WorkerFactory.create,
+      inject: [Config, Logger],
+    }
   ]
 })
 export class AppModule { }
