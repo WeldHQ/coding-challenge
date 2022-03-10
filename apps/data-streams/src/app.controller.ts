@@ -22,4 +22,10 @@ export class AppController {
     return JSON.stringify(response);
   }
 
+  @Get("stop")
+  async stopWorker(): Promise<string> {
+    const response = await this.appService.stopWorker()
+    return JSON.stringify(response);
+  }
+
 }
