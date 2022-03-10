@@ -15,12 +15,12 @@ async function bootstrap() {
     WorkerModule,
     {
       transport: Transport.TCP,
-      options: { host: '0.0.0.0', port: config.WORKER_PORT }
+      options: { host: '0.0.0.0', port: config.WORKER_TCP_PORT }
     },
   );
   app.useGlobalPipes(new ValidationPipe());
   app.useLogger(logger);
-  await app.listen(() => { logger.log(`Worker started. Listening on port: ${config.WORKER_PORT}`) });
+  await app.listen(() => { logger.log(`Worker started. Listening on port: ${config.WORKER_TCP_PORT}`) });
 }
 
 bootstrap();

@@ -8,9 +8,10 @@ services:
     command: "tail -f /dev/null"
     environment:
       WORKER_HOST: ${WORKER_HOST}
-      WORKER_PORT: ${WORKER_PORT}
+      WORKER_TCP_PORT: ${WORKER_TCP_PORT}
       APP_HOST: ${APP_HOST}
-      APP_PORT: ${APP_PORT}
+      APP_HTTP_PORT: ${APP_HTTP_PORT}
+      APP_TCP_PORT: ${APP_TCP_PORT}
     volumes:
       - ./:/app
     networks:
