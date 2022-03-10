@@ -1,13 +1,15 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseFilters } from '@nestjs/common';
+import { AllExceptionsFilter } from './allExceptions.filter';
 import { AppService } from './app.service';
 
-@Controller()
+@UseFilters(AllExceptionsFilter)
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
-  @Get()
-  startWorker(): string {
-    const success = this.appService.startWorker()
-    return JSON.stringify({ "success": success, "message": "Started fetching from adapter IQAIR_DAILY." });
+  @Get("start")
+  async startWorker(): Promise<string> {
+    const response = await this.appService.startWorker({ "test": true })
+    return JSON.stringify(response);
+  }
   }
 }
