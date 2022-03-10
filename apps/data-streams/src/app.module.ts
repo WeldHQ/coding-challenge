@@ -4,10 +4,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Config } from './app.config.service';
 import { WorkerFactory } from './app.worker.factory';
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ ignoreEnvFile: true }),
+    LoggerModule.forRoot()
   ],
   controllers: [AppController],
   providers: [
