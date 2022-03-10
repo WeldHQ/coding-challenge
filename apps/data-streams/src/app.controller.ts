@@ -12,5 +12,5 @@ export class AppController {
     const response = await this.appService.startWorker({ "test": true })
     return JSON.stringify(response);
   }
-  }
+
 }

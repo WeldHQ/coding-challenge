@@ -1,6 +1,7 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { LoggerFactory } from './app.logger.factory';
+import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { lastValueFrom, Observable, timeout } from 'rxjs';
 
 @Injectable()
 export class AppService {

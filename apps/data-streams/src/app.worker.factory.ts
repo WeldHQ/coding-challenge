@@ -1,7 +1,7 @@
 import { Logger } from "@nestjs/common";
 import { ClientProxyFactory, Transport } from "@nestjs/microservices";
+import { LoggerFactory } from "apps/util/util.logger.factory";
 import { Config } from "./app.config.service";
-import { LoggerFactory } from "./app.logger.factory";
 
 export class WorkerFactory {
 
