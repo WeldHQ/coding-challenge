@@ -11,10 +11,13 @@ export class AppService {
   constructor(@Inject('WORKER') private worker: ClientProxy) { }
 
   async startWorker(streamDescription) {
-    this.logger.debug(["Sending a start request to the worker.", streamDescription])
-    const success: Observable<boolean> = this.worker.send('start', {}).pipe(timeout(5000));
+    this.logger.debug(`Sending a start request to the worker: ${streamDescription.adapter}`)
+    const success: Observable<boolean> = this.worker.send('start', streamDescription).pipe(timeout(5000));
     const result = await lastValueFrom(success)
     return result
   }
 
 }
+
+
+

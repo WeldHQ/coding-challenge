@@ -5,6 +5,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Config } from './worker.config.service';
+import { ValidationPipe } from 'apps/util/validation.pipe';
 
 async function bootstrap() {
   const logger: Logger = LoggerFactory.createLogger('main')
@@ -17,6 +18,7 @@ async function bootstrap() {
       options: { host: '0.0.0.0', port: config.WORKER_PORT }
     },
   );
+  app.useGlobalPipes(new ValidationPipe());
   app.useLogger(logger);
   await app.listen(() => { logger.log(`Worker started. Listening on port: ${config.WORKER_PORT}`) });
 }
