@@ -9,10 +9,15 @@ export class WorkerController {
 
   constructor(private readonly workerService: WorkerService) { }
 
-
   @MessagePattern('start')
-  getHello(): string {
-    console.log(true)
-    return this.workerService.getHello();
+  start(): object {
+    this.workerService.startFetchCycle()
+    return { success: true, message: "Started fetching from adapter IQAIR_DAILY." }
+  }
+
+  @MessagePattern('stop')
+  stop(): object {
+    this.workerService.stopFetchCycle()
+    return { success: true, message: "Stopped fetching from adapter IQAIR_DAILY." }
   }
 }

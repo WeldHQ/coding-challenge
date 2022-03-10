@@ -1,8 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
 @Injectable()
 export class WorkerService {
-  getHello(): string {
-    return 'Hello World!';
+
+  constructor(private readonly logger: Logger) { }
+
+  startFetchCycle() {
+    this.logger.log('Starting fetch cycle.')
+  }
+
+  stopFetchCycle() {
+    this.logger.log('Stopping fetch cycle.')
   }
 }
