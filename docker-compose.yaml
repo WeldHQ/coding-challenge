@@ -9,6 +9,8 @@ services:
     environment:
       WORKER_HOST: ${WORKER_HOST}
       WORKER_PORT: ${WORKER_PORT}
+      APP_HOST: ${APP_HOST}
+      APP_PORT: ${APP_PORT}
     volumes:
       - ./:/app
     networks:
