@@ -5,13 +5,14 @@ import { AppService } from './app.service';
 import { Config } from './app.config.service';
 import { WorkerConnectionFactory } from './app.worker.connection.factory';
 import { LoggerModule } from 'nestjs-pino';
+import { TcpController } from './app.tcp.controller';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ ignoreEnvFile: true }),
     LoggerModule.forRoot()
   ],
-  controllers: [AppController],
+  controllers: [AppController, TcpController],
   providers: [
     AppService,
     Config,

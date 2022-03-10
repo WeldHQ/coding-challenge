@@ -4,6 +4,7 @@ import { LoggerModule } from 'nestjs-pino';
 import { Config } from './worker.config.service';
 import { WorkerController } from './worker.controller';
 import { DataStreamsConnectionFactory } from './worker.data-streams.connection.factory';
+import { DataStreamsService } from './worker.data-streams.service';
 import { WorkerService } from './worker.service';
 
 @Module({
@@ -20,7 +21,7 @@ import { WorkerService } from './worker.service';
       useFactory: DataStreamsConnectionFactory.create,
       inject: [Config],
     },
-    Config
+    DataStreamsService
   ],
 })
 export class WorkerModule { }
