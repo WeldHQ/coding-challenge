@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Config } from './app.config.service';
-import { WorkerFactory } from './app.worker.factory';
+import { WorkerConnectionFactory } from './app.worker.connection.factory';
 import { LoggerModule } from 'nestjs-pino';
 
 @Module({
@@ -17,7 +17,7 @@ import { LoggerModule } from 'nestjs-pino';
     Config,
     {
       provide: 'WORKER',
-      useFactory: WorkerFactory.create,
+      useFactory: WorkerConnectionFactory.create,
       inject: [Config],
     }
   ]

@@ -3,12 +3,12 @@ import { ClientProxyFactory, Transport } from "@nestjs/microservices";
 import { LoggerFactory } from "apps/util/util.logger.factory";
 import { Config } from "./app.config.service";
 
-export class WorkerFactory {
+export class WorkerConnectionFactory {
 
     public static create(config: Config) {
-        const logger: Logger = LoggerFactory.createLogger(WorkerFactory.name);
+        const logger: Logger = LoggerFactory.createLogger(WorkerConnectionFactory.name);
         const host: string = config.WORKER_HOST
-        const port: number = config.WORKER_PORT
+        const port: number = config.WORKER_TCP_PORT
 
         logger.debug(`Registering microservice connection: ${host}:${port} `)
         return ClientProxyFactory.create({
