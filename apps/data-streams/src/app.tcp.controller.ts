@@ -1,11 +1,11 @@
 import { Controller, Logger, UseFilters } from '@nestjs/common';
 import { EventPattern } from '@nestjs/microservices';
+import { GrpcExceptionsFilter } from 'apps/util/grpcExceptions.filter';
 import { LoggerFactory } from 'apps/util/util.logger.factory';
-import { AllExceptionsFilter } from './allExceptions.filter';
 import { AppService } from './app.service';
 
 @Controller()
-@UseFilters(AllExceptionsFilter)
+@UseFilters(GrpcExceptionsFilter)
 export class TcpController {
 
   private readonly logger: Logger = LoggerFactory.createLogger(TcpController.name)

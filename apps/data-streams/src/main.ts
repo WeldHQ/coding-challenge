@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { LoggerFactory } from 'apps/util/util.logger.factory';
 import { ValidationPipe } from 'apps/util/validation.pipe';
-import { Config } from './app.config.service';
+import { Config } from '../../util/config.service';
 import { AppModule } from './app.module';
 
 async function bootstrap() {

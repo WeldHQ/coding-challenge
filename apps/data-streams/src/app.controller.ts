@@ -1,10 +1,10 @@
 import { Controller, Get, UseFilters } from '@nestjs/common';
 import { WorkerConfigDto } from 'apps/worker/src/worker.config.dto';
-import { AllExceptionsFilter } from './allExceptions.filter';
+import { HttpExceptionsFilter } from '../../util/httpExceptions.filter';
 import { AppService } from './app.service';
 
 @Controller("private")
-@UseFilters(AllExceptionsFilter)
+@UseFilters(HttpExceptionsFilter)
 export class AppController {
   constructor(private readonly appService: AppService) { }
 

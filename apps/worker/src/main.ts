@@ -4,8 +4,8 @@ import { LoggerFactory } from 'apps/util/util.logger.factory';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Config } from './worker.config.service';
 import { ValidationPipe } from 'apps/util/validation.pipe';
+import { Config } from 'apps/util/config.service';
 
 async function bootstrap() {
   const logger: Logger = LoggerFactory.createLogger('main')

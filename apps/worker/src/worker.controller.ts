@@ -1,11 +1,11 @@
 import { Body, Controller, UseFilters } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { ExceptionFilter } from './exception.filter';
+import { GrpcExceptionsFilter } from '../../util/grpcExceptions.filter';
 import { WorkerConfigDto } from './worker.config.dto';
 import { WorkerService } from './worker.service';
 
 @Controller()
-@UseFilters(ExceptionFilter)
+@UseFilters(GrpcExceptionsFilter)
 export class WorkerController {
 
   constructor(private readonly workerService: WorkerService) { }

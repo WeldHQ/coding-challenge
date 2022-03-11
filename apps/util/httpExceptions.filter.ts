@@ -6,10 +6,10 @@ import {
     HttpStatus,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
-import { Config } from './app.config.service';
+import { Config } from './config.service';
 
 @Catch()
-export class AllExceptionsFilter implements ExceptionFilter {
+export class HttpExceptionsFilter implements ExceptionFilter {
 
     constructor(private readonly conf: Config, private readonly httpAdapterHost: HttpAdapterHost) { }
 

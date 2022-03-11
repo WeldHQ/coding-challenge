@@ -1,9 +1,9 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { Config } from 'apps/util/config.service';
 import { LoggerModule } from 'nestjs-pino';
 import { IQAirProvider } from './iqair.provider';
-import { Config } from './worker.config.service';
 import { WorkerController } from './worker.controller';
 import { DataStreamsConnectionFactory } from './worker.data-streams.connection.factory';
 import { DataStreamsService } from './worker.data-streams.service';
