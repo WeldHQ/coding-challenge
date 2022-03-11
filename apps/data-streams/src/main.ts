@@ -15,22 +15,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   app.useLogger(LoggerFactory.createLogger(AppModule.name));
   app.useGlobalPipes(new ValidationPipe());
+
+  app.connectMicroservice({
+    transport: Transport.TCP,
+    options: { host: '0.0.0.0', port: config.APP_TCP_PORT }
+  });
+  await app.startAllMicroservices();
+
   await app.listen(
     config.APP_HTTP_PORT,
-    () => { logger.log(`Data Streams started. Listening on port: ${config.APP_HTTP_PORT}`) }
-  );
-
-  // Listen for TCP
-  const tcpApp = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,
-    {
-      transport: Transport.TCP,
-      options: { host: '0.0.0.0', port: config.APP_TCP_PORT }
-    },
-  );
-  tcpApp.useLogger(LoggerFactory.createLogger(AppModule.name));
-  tcpApp.useGlobalPipes(new ValidationPipe());
-  await tcpApp.listen(
     () => { logger.log(`Data Streams started. Listening on port: ${config.APP_HTTP_PORT}`) }
   );
 }
