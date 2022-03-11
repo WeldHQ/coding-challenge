@@ -1,6 +1,8 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
+import { IQAirProvider } from './iqair.provider';
 import { Config } from './worker.config.service';
 import { WorkerController } from './worker.controller';
 import { DataStreamsConnectionFactory } from './worker.data-streams.connection.factory';
@@ -10,7 +12,8 @@ import { WorkerService } from './worker.service';
 @Module({
   imports: [
     ConfigModule.forRoot({ ignoreEnvFile: true }),
-    LoggerModule.forRoot()
+    LoggerModule.forRoot(),
+    HttpModule
   ],
   controllers: [WorkerController],
   providers: [
@@ -21,7 +24,8 @@ import { WorkerService } from './worker.service';
       useFactory: DataStreamsConnectionFactory.create,
       inject: [Config],
     },
-    DataStreamsService
+    DataStreamsService,
+    IQAirProvider
   ],
 })
 export class WorkerModule { }
