@@ -1,6 +1,6 @@
-import { Controller, UseFilters } from '@nestjs/common';
+import { Controller, Logger, UseFilters } from '@nestjs/common';
 import { EventPattern } from '@nestjs/microservices';
-import { WorkerConfigDto } from 'apps/worker/src/worker.config.dto';
+import { LoggerFactory } from 'apps/util/util.logger.factory';
 import { AllExceptionsFilter } from './allExceptions.filter';
 import { AppService } from './app.service';
 
@@ -8,19 +8,18 @@ import { AppService } from './app.service';
 @UseFilters(AllExceptionsFilter)
 export class TcpController {
 
+  private readonly logger: Logger = LoggerFactory.createLogger(TcpController.name)
+
   constructor(private readonly appService: AppService) { }
 
   @EventPattern('worker_available')
   async workerAvailable(): Promise<string> {
-    const workerDefinition = new WorkerConfigDto(
-      "IQAIR_DAILY",
-      300000, // 5 minutes
-      30000,   // 30 seconds
-      // "endpoint": "http://api.airvisual.com/v2/nearest_city",
-      // "secret_key": "mykey",
-    )
-    const response = await this.appService.startWorker(workerDefinition)
-    return JSON.stringify(response);
+    try {
+      return JSON.stringify(await this.appService.restartWorker());
+    } catch (e) {
+      this.logger.error(e)
+      this.logger.error("Worker restart failed. No stream definition provided")
+    }
   }
 
 }

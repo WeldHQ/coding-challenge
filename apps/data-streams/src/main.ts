@@ -11,17 +11,17 @@ async function bootstrap() {
   const logger: Logger = LoggerFactory.createLogger('main')
   const config = new Config(new ConfigService())
 
-  // Listen for HTTP
   const app = await NestFactory.create(AppModule)
   app.useLogger(LoggerFactory.createLogger(AppModule.name));
   app.useGlobalPipes(new ValidationPipe());
-
   app.connectMicroservice({
     transport: Transport.TCP,
     options: { host: '0.0.0.0', port: config.APP_TCP_PORT }
   });
-  await app.startAllMicroservices();
 
+  await app.startAllMicroservices(
+    () => { logger.log(`Data Streams started. Listening on port: ${config.APP_TCP_PORT}`) }
+  );
   await app.listen(
     config.APP_HTTP_PORT,
     () => { logger.log(`Data Streams started. Listening on port: ${config.APP_HTTP_PORT}`) }
