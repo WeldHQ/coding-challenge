@@ -1,8 +1,8 @@
 import { Body, Controller, Logger, UseFilters } from '@nestjs/common';
 import { EventPattern } from '@nestjs/microservices';
-import { GrpcExceptionsFilter } from 'apps/util/grpcExceptions.filter';
-import { ResultsDto } from 'apps/util/results.dto';
-import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { GrpcExceptionsFilter } from '../../util/grpcExceptions.filter';
+import { ResultsDto } from '../../util/results.dto';
+import { LoggerFactory } from '../../util/util.logger.factory';
 import { DataStoreProvider } from './app.datastore.provider';
 import { AppService } from './app.service';
 

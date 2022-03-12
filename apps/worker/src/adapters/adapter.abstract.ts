@@ -1,7 +1,7 @@
 import { Logger } from '@nestjs/common';
-import { AxiosErrorTransformer } from 'apps/util/axios.error.transformer';
-import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
 import { ObservableInput } from 'rxjs';
+import { AxiosErrorTransformer } from '../../../util/axios.error.transformer';
+import { StreamDescriptionDto } from '../../../util/streamDescription.dto';
 
 export abstract class Adapter {
   readonly name: string;

@@ -1,8 +1,8 @@
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { Payload, ResultsDto } from 'apps/util/results.dto';
-import { Response } from 'apps/util/response.dto';
-import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { Payload, ResultsDto } from '../../util/results.dto';
+import { Response } from '../../util/response.dto';
+import { LoggerFactory } from '../../util/util.logger.factory';
 import { lastValueFrom, Observable, timeout } from 'rxjs';
 
 @Injectable()

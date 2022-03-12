@@ -1,7 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
-import { Config } from 'apps/util/config.service';
-import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { Config } from '../../util/config.service';
+import { LoggerFactory } from '../../util/util.logger.factory';
 
 export class DataStreamsConnectionFactory {
   public static create(config: Config) {

@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common';
-import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { LoggerFactory } from '../../../util/util.logger.factory';
 import { Adapter } from './adapter.abstract';
 
 export class MockAdapter extends Adapter {

@@ -5,6 +5,7 @@
         "eamodio.gitlens",
         "abhijoybasak.nestjs-files",
         "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "Orta.vscode-jest"
     ]
 }

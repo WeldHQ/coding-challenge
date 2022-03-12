@@ -2,7 +2,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
-import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { LoggerFactory } from '../../util/util.logger.factory';
 import { Config } from '../../util/config.service';
 import { AppModule } from './app.module';
 

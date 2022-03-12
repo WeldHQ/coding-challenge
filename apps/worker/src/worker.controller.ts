@@ -1,9 +1,9 @@
 import { Body, Controller, UseFilters } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { Response } from 'apps/util/response.dto';
+import { Response } from '../../util/response.dto';
 import { GrpcExceptionsFilter } from '../../util/grpcExceptions.filter';
-import { StreamDescriptionDto } from '../../util/streamDescription.dto';
 import { WorkerService } from './worker.service';
+import { StreamDescriptionDto } from '../../util/streamDescription.dto';
 
 @Controller()
 @UseFilters(GrpcExceptionsFilter)

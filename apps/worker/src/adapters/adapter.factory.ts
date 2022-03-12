@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
+import { StreamDescriptionDto } from '../../../util/streamDescription.dto';
 import { IQAirAdapter } from './iqair.adapter';
 import { MockAdapter } from './mock.adapter';
 

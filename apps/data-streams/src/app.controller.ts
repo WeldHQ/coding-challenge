@@ -6,9 +6,9 @@ import {
   Param,
   UseFilters,
 } from '@nestjs/common';
-import { Response } from 'apps/util/response.dto';
-import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
-import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { Response } from '../../util/response.dto';
+import { StreamDescriptionDto } from '../../util/streamDescription.dto';
+import { LoggerFactory } from '../../util/util.logger.factory';
 import { HttpExceptionsFilter } from '../../util/httpExceptions.filter';
 import { DataStoreProvider } from './app.datastore.provider';
 import { AppService } from './app.service';

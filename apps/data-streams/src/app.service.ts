@@ -1,8 +1,8 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { Response } from 'apps/util/response.dto';
-import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
-import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { Response } from '../../util/response.dto';
+import { StreamDescriptionDto } from '../../util/streamDescription.dto';
+import { LoggerFactory } from '../../util/util.logger.factory';
 import { lastValueFrom, Observable, timeout } from 'rxjs';
 
 @Injectable()

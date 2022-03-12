@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Logger } from '@nestjs/common';
-import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
-import { LoggerFactory } from 'apps/util/util.logger.factory';
+import { StreamDescriptionDto } from '../../../util/streamDescription.dto';
+import { LoggerFactory } from '../../../util/util.logger.factory';
 import { AxiosResponse } from 'axios';
 import { catchError, lastValueFrom, timeout } from 'rxjs';
 import { Adapter } from './adapter.abstract';

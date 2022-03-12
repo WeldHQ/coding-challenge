@@ -1,7 +1,7 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { Config } from 'apps/util/config.service';
+import { Config } from '../../util/config.service';
 import { LoggerModule } from 'nestjs-pino';
 import { AdapterFactory } from './adapters/adapter.factory';
 import { WorkerController } from './worker.controller';
