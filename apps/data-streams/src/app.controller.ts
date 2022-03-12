@@ -1,7 +1,6 @@
 import { Controller, Get, UseFilters } from '@nestjs/common';
 import { Response } from 'apps/util/response.dto';
 import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
-import { IQAirConfigDto } from 'apps/worker/src/adapters/iqair.config.dto';
 import { HttpExceptionsFilter } from '../../util/httpExceptions.filter';
 import { AppService } from './app.service';
 
@@ -18,7 +17,7 @@ export class AppController {
       'IQAIR_DAILY',
       300000, // 5 minutes
       30000,   // 30 seconds
-      new IQAirConfigDto('http://api.airvisual.com/v2/nearest_city', 'mykey')
+      { endpoint: 'http://api.airvisual.com/v2/nearest_city', secretKey: 'mykey' }
     )
 
     const response = this.appService.startWorker(workerDefinition)
