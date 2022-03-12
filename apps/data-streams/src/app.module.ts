@@ -6,6 +6,7 @@ import { WorkerConnectionFactory } from './app.worker.connection.factory';
 import { LoggerModule } from 'nestjs-pino';
 import { TcpController } from './app.tcp.controller';
 import { Config } from 'apps/util/config.service';
+import { DataStoreProvider } from './app.datastore.provider';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { Config } from 'apps/util/config.service';
       provide: 'WORKER',
       useFactory: WorkerConnectionFactory.create,
       inject: [Config],
-    }
+    },
+    DataStoreProvider
   ]
 })
 export class AppModule { }

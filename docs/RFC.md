@@ -121,7 +121,8 @@ We have two separate concerns in the app. The usual `calls` vs `casts` situation
       - Ideally, it would be responded to by sending a start message.
     - `data-streams:results`
       - The body will not contain the full payload. Instead we send only the reference to it.
-      - The body will take the following shape:
+      - Returns an idempotent standard response shape. `{"success": true, "message": "Accepted the payload."}`
+      - The request body will take the following shape:
         ```json
           {
             "adapter": "IQAIR_DAILY",

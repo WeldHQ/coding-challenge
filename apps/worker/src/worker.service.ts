@@ -43,7 +43,7 @@ export class WorkerService {
   private async fetchAndEmit(adapter) {
     try {
       const results = await adapter.fetch(this.adapter.timeout)
-      this.dataStreams.emitResults(results)
+      this.dataStreams.emitResults(adapter.name, results)
     } catch (error) {
       this.logger.error(error)
     }
