@@ -1,7 +1,7 @@
 import { Logger } from "@nestjs/common"
 import { AxiosErrorTransformer } from "apps/util/axios.error.transformer"
+import { StreamDescriptionDto } from "apps/util/streamDescription.dto"
 import { ObservableInput } from "rxjs"
-import { WorkerConfigDto } from "../worker.config.dto"
 
 export abstract class Adapter {
 
@@ -9,7 +9,7 @@ export abstract class Adapter {
     readonly timeout: number
     protected readonly logger: Logger
 
-    constructor(streamDescription: WorkerConfigDto) {
+    constructor(streamDescription: StreamDescriptionDto) {
         this.name = streamDescription.adapter
         this.timeout = streamDescription.timeout
     }

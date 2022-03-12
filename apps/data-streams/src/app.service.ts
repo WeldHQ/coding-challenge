@@ -1,20 +1,20 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Response } from 'apps/util/response.dto';
+import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
 import { LoggerFactory } from 'apps/util/util.logger.factory';
-import { WorkerConfigDto } from 'apps/worker/src/worker.config.dto';
 import { lastValueFrom, Observable, timeout } from 'rxjs';
 
 @Injectable()
 export class AppService {
 
-  private streamDescription: WorkerConfigDto
+  private streamDescription: StreamDescriptionDto
 
   private readonly logger: Logger = LoggerFactory.createLogger(AppService.name);
 
   constructor(@Inject('WORKER') private worker: ClientProxy) { }
 
-  async startWorker(streamDescription: WorkerConfigDto): Promise<Response> {
+  async startWorker(streamDescription: StreamDescriptionDto): Promise<Response> {
     this.streamDescription = streamDescription
     this.logger.debug(`Sending a start request to the worker: ${streamDescription.adapter}`)
     const success: Observable<Response> = this.worker

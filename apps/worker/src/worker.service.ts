@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { LoggerFactory } from 'apps/util/util.logger.factory';
 import { Adapter } from './adapters/adapter.abstract';
 import { AdapterFactory } from './adapters/adapter.factory';
-import { WorkerConfigDto } from './worker.config.dto';
+import { StreamDescriptionDto } from '../../util/streamDescription.dto';
 import { DataStreamsService } from './worker.data-streams.service';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class WorkerService {
     private adapterFactory: AdapterFactory
   ) { }
 
-  async startFetchCycle(streamDescription: WorkerConfigDto) {
+  async startFetchCycle(streamDescription: StreamDescriptionDto) {
     if (this.intervalId) { this.stopFetchCycle() }
     this.adapter = this.adapterFactory.create(streamDescription)
 
@@ -37,7 +37,12 @@ export class WorkerService {
   }
 
   getAdapterName(): string {
-    return this.adapter.name
+    try {
+      return this.adapter.name
+    } catch (e) {
+      this.logger.error("Worker is not confugred yet.")
+      return "NOT_CONFIGURED"
+    }
   }
 
   private async fetchAndEmit(adapter) {

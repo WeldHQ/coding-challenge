@@ -2,7 +2,7 @@ import { Body, Controller, UseFilters } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Response } from 'apps/util/response.dto';
 import { GrpcExceptionsFilter } from '../../util/grpcExceptions.filter';
-import { WorkerConfigDto } from './worker.config.dto';
+import { StreamDescriptionDto } from '../../util/streamDescription.dto';
 import { WorkerService } from './worker.service';
 
 @Controller()
@@ -12,8 +12,8 @@ export class WorkerController {
   constructor(private readonly workerService: WorkerService) { }
 
   @MessagePattern('start')
-  start(@Body() data: WorkerConfigDto): Response {
-    this.workerService.startFetchCycle(data)
+  start(@Body() streamDescription: StreamDescriptionDto): Response {
+    this.workerService.startFetchCycle(streamDescription)
     return { success: true, message: `Started fetching from adapter ${this.workerService.getAdapterName()}.` }
   }
 

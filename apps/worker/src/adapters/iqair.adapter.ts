@@ -1,17 +1,18 @@
 import { HttpService } from "@nestjs/axios";
 import { Logger } from "@nestjs/common";
+import { StreamDescriptionDto } from "apps/util/streamDescription.dto";
 import { LoggerFactory } from "apps/util/util.logger.factory";
 import { AxiosResponse } from "axios";
 import { catchError, lastValueFrom, timeout } from "rxjs";
-import { WorkerConfigDto } from "../worker.config.dto";
 import { Adapter } from "./adapter.abstract";
+import { IQAirConfigDto } from "./iqair.config.dto";
 
 export class IQAirAdapter extends Adapter {
 
   protected readonly logger: Logger = LoggerFactory.createLogger(IQAirAdapter.name)
   private readonly httpService: HttpService
 
-  constructor(streamDescription: WorkerConfigDto, httpService: HttpService) {
+  constructor(streamDescription: StreamDescriptionDto, httpService: HttpService) {
     super(streamDescription)
     this.httpService = httpService
   }

@@ -1,6 +1,6 @@
 import { IsDefined, IsIn, IsNotEmpty, IsNumber, IsPositive, IsString, Min } from "class-validator";
 
-export class WorkerConfigDto {
+export class StreamDescriptionDto {
 
     @IsDefined()
     @IsNotEmpty()
@@ -22,10 +22,13 @@ export class WorkerConfigDto {
     @Min(3000)
     readonly timeout: number
 
-    constructor(adapter: string, interval: number, timeout: number) {
+    readonly config?: object
+
+    constructor(adapter: string, interval: number, timeout: number, config?: object) {
         this.adapter = adapter
         this.interval = interval
         this.timeout = timeout
+        this.config = config
     }
 
 }
