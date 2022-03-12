@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { Config } from 'apps/util/config.service';
 import { LoggerModule } from 'nestjs-pino';
-import { IQAirProvider } from './iqair.provider';
+import { AdapterFactory } from './adapters/adapter.factory';
 import { WorkerController } from './worker.controller';
 import { DataStreamsConnectionFactory } from './worker.data-streams.connection.factory';
 import { DataStreamsService } from './worker.data-streams.service';
@@ -25,7 +25,7 @@ import { WorkerService } from './worker.service';
       inject: [Config],
     },
     DataStreamsService,
-    IQAirProvider
+    AdapterFactory
   ],
 })
 export class WorkerModule { }
