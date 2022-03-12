@@ -10,6 +10,7 @@
     "**/dist/**": true,
     "**/.tmp/**": true
   },
+  "jest.autoRun": "off",
   "typescript.preferences.importModuleSpecifier": "relative",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

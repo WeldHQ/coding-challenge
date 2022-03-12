@@ -1,17 +1,17 @@
 services:
-
   worker:
     container_name: weld_worker
     build:
       context: .
       dockerfile: dev.Dockerfile
-    command: "tail -f /dev/null"
+    command: 'tail -f /dev/null'
     environment:
       WORKER_HOST: ${WORKER_HOST}
       WORKER_TCP_PORT: ${WORKER_TCP_PORT}
       APP_HOST: ${APP_HOST}
       APP_HTTP_PORT: ${APP_HTTP_PORT}
       APP_TCP_PORT: ${APP_TCP_PORT}
+      IQAIR_API_KEY: ${IQAIR_API_KEY}
     volumes:
       - ./:/app
     networks:
@@ -28,7 +28,7 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     healthcheck:
-      test: [ "CMD", "curl", "http://weld_minio:9000" ]
+      test: ['CMD', 'curl', 'http://weld_minio:9000']
       interval: 30s
       timeout: 10s
       start_period: 15s
@@ -49,18 +49,18 @@ services:
     healthcheck:
       test:
         [
-          "CMD",
-          "echo",
+          'CMD',
+          'echo',
           "'SELECT 1'",
-          "|",
-          "psql",
-          "--host=127.0.0.1",
-          "--username=${POSTGRESQL_USER}",
-          "-w",
-          "--dbname=${POSTGRESQL_DB}",
-          "--quiet",
-          "--no-align",
-          "--tuples-only"
+          '|',
+          'psql',
+          '--host=127.0.0.1',
+          '--username=${POSTGRESQL_USER}',
+          '-w',
+          '--dbname=${POSTGRESQL_DB}',
+          '--quiet',
+          '--no-align',
+          '--tuples-only',
         ]
       interval: 30s
       timeout: 10s

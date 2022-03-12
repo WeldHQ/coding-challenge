@@ -12,6 +12,7 @@ import { LoggerFactory } from '../../util/util.logger.factory';
 import { HttpExceptionsFilter } from '../../util/httpExceptions.filter';
 import { DataStoreProvider } from './app.datastore.provider';
 import { AppService } from './app.service';
+import { Config } from '../../util/config.service';
 
 @Controller('private')
 @UseFilters(HttpExceptionsFilter)
@@ -23,6 +24,7 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly datastore: DataStoreProvider,
+    private readonly config: Config,
   ) {}
 
   @Get('start')
@@ -33,10 +35,7 @@ export class AppController {
       'IQAIR_DAILY',
       300000, // 5 minutes
       30000, // 30 seconds
-      {
-        endpoint: 'http://api.airvisual.com/v2/nearest_city',
-        secretKey: 'mykey',
-      },
+      this.config.IQAIR_CONFIG,
     );
 
     const response = this.appService.startWorker(workerDefinition);

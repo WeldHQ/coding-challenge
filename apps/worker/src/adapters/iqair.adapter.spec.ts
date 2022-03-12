@@ -29,7 +29,7 @@ describe('WorkerController', () => {
   it('should throw an error with wrong credentials', async (done) => {
     const adapter = new IQAirAdapter(
       new StreamDescriptionDto('IQAIR_DAILY', 3000, 3000, {
-        endpoint: 'http://api.airvisual.com/v2/nearest_city',
+        origin: 'http://api.airvisual.com',
         secretKey: 'mykey',
       }),
       httpService,
@@ -49,17 +49,22 @@ describe('WorkerController', () => {
   it('will return parsed data on success', async (done) => {
     const adapter = new IQAirAdapter(
       new StreamDescriptionDto('IQAIR_DAILY', 3000, 3000, {
-        endpoint: '',
+        origin: '',
         secretKey: '',
       }),
       httpService,
     );
 
+    const currentPollutionData = {
+      ts: '2019-08-04T03:00:00.000Z;',
+      aqius: 1,
+      mainus: 'pm2',
+      aqicn: 1,
+      maincn: 'pm2',
+    };
+
     const apiResponse: AxiosResponse = {
-      data: {
-        name: 'Jane Doe',
-        grades: [3.7, 3.8, 3.9, 4.0, 3.6],
-      },
+      data: { data: { current: { pollution: currentPollutionData } } },
       status: 200,
       statusText: 'OK',
       headers: {},
@@ -70,10 +75,7 @@ describe('WorkerController', () => {
       .spyOn(httpService, 'get')
       .mockImplementationOnce(() => of(apiResponse));
 
-    expect(await adapter.fetch()).toMatchObject({
-      name: 'Jane Doe',
-      grades: [3.7, 3.8, 3.9, 4.0, 3.6],
-    });
+    expect(await adapter.fetch()).toMatchObject(currentPollutionData);
     done();
   });
 });

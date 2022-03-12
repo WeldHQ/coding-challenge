@@ -29,13 +29,13 @@ export class StreamDescriptionDto {
   @Min(3000)
   readonly timeout: number;
 
-  readonly config?: Record<string, any>;
+  readonly config?: any;
 
   constructor(
     adapter: string,
     interval: number,
     timeout: number,
-    config?: Record<string, any>,
+    config?: any,
   ) {
     this.adapter = adapter;
     this.interval = interval;
