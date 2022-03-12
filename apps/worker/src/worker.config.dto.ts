@@ -1,7 +1,11 @@
-import { IsDefined, IsIn, IsNotEmpty, IsNumber, IsPositive, Min } from "class-validator";
+import { IsDefined, IsIn, IsNotEmpty, IsNumber, IsPositive, IsString, Min } from "class-validator";
 
 export class WorkerConfigDto {
-    @IsIn(['IQAIR_DAILY'])
+
+    @IsDefined()
+    @IsNotEmpty()
+    @IsString()
+    @IsIn(['IQAIR_DAILY', 'MOCK'])
     readonly adapter: string
 
     @IsDefined()
