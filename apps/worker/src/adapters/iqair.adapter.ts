@@ -1,12 +1,20 @@
+import { HttpService } from "@nestjs/axios";
 import { Logger } from "@nestjs/common";
 import { LoggerFactory } from "apps/util/util.logger.factory";
 import { AxiosResponse } from "axios";
 import { catchError, lastValueFrom, timeout } from "rxjs";
+import { WorkerConfigDto } from "../worker.config.dto";
 import { Adapter } from "./adapter.abstract";
 
 export class IQAirAdapter extends Adapter {
 
   protected readonly logger: Logger = LoggerFactory.createLogger(IQAirAdapter.name)
+  private readonly httpService: HttpService
+
+  constructor(streamDescription: WorkerConfigDto, httpService: HttpService) {
+    super(streamDescription)
+    this.httpService = httpService
+  }
 
   async fetch(): Promise<object> {
     this.logger.debug("Fetching new data from IQAir.")

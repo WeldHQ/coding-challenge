@@ -1,4 +1,3 @@
-import { HttpService } from "@nestjs/axios"
 import { Logger } from "@nestjs/common"
 import { AxiosErrorTransformer } from "apps/util/axios.error.transformer"
 import { ObservableInput } from "rxjs"
@@ -9,12 +8,10 @@ export abstract class Adapter {
     readonly name: string
     readonly timeout: number
     protected readonly logger: Logger
-    protected readonly httpService: HttpService
 
-    constructor(streamDescription: WorkerConfigDto, httpService: HttpService) {
+    constructor(streamDescription: WorkerConfigDto) {
         this.name = streamDescription.adapter
         this.timeout = streamDescription.timeout
-        this.httpService = httpService
     }
 
     protected transformAxiosError(error, outputTransfomer = JSON.stringify): ObservableInput<any> {
