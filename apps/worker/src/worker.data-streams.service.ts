@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Payload, ResultsDto } from 'apps/util/results.dto';
-import { SuccessResponse } from 'apps/util/success.response.dto';
+import { Response } from 'apps/util/response.dto';
 import { LoggerFactory } from 'apps/util/util.logger.factory';
 import { lastValueFrom, Observable, timeout } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class DataStreamsService implements OnModuleInit {
             new Payload('noop-id', 'noop-filename', results)
         )
 
-        const success: Observable<SuccessResponse> = this.dataStreams
+        const success: Observable<Response> = this.dataStreams
             .emit('results', resultsDto)
             .pipe(timeout(5000));
         return await lastValueFrom(success)

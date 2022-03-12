@@ -15,12 +15,11 @@ export class ResultsDto {
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
-  readonly timestamp: Number
+  readonly timestamp: Number = Math.floor(Date.now() / 1000)
 
   constructor(adapter: string, payload: Payload) {
     this.adapter = adapter
     this.payload = payload
-    this.timestamp = Math.floor(Date.now() / 1000)
   }
 
 }
