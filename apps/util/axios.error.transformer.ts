@@ -21,7 +21,7 @@ export abstract class AxiosErrorTransformer {
       // that falls out of the range of 2xx
       logger.error('Received a non 200 status code.');
       logger.error(outputTransfomer(error.response.data));
-      throw new Error(error.response.data);
+      throw new Error(outputTransfomer(error.response.data));
     } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of

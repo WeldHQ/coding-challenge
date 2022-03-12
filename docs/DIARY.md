@@ -57,6 +57,7 @@ I've found it useful to write down a very simple shortform work diary & Notes. I
 - Axios errors are a bit unpredictable. Implemented an axios utility fun
 - Working on setting up some basic e2e test cases
   - This guide helped [A LOT](https://stackoverflow.com/questions/57315466/e2e-testing-a-microservice-in-nest)
+- Fighting with worker tests where I have to use the same connection twice
 
 TODOS:
 
