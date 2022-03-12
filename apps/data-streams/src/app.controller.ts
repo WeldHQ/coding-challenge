@@ -1,4 +1,11 @@
-import { Controller, Get, Logger, NotFoundException, Param, UseFilters } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Logger,
+  NotFoundException,
+  Param,
+  UseFilters,
+} from '@nestjs/common';
 import { Response } from 'apps/util/response.dto';
 import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
 import { LoggerFactory } from 'apps/util/util.logger.factory';
@@ -9,10 +16,14 @@ import { AppService } from './app.service';
 @Controller('private')
 @UseFilters(HttpExceptionsFilter)
 export class AppController {
+  private readonly logger: Logger = LoggerFactory.createLogger(
+    AppController.name,
+  );
 
-  private readonly logger: Logger = LoggerFactory.createLogger(AppController.name)
-
-  constructor(private readonly appService: AppService, private readonly datastore: DataStoreProvider) { }
+  constructor(
+    private readonly appService: AppService,
+    private readonly datastore: DataStoreProvider,
+  ) {}
 
   @Get('start')
   startWorker(): Promise<Response> {
@@ -21,11 +32,14 @@ export class AppController {
     const workerDefinition = new StreamDescriptionDto(
       'IQAIR_DAILY',
       300000, // 5 minutes
-      30000,   // 30 seconds
-      { endpoint: 'http://api.airvisual.com/v2/nearest_city', secretKey: 'mykey' }
-    )
+      30000, // 30 seconds
+      {
+        endpoint: 'http://api.airvisual.com/v2/nearest_city',
+        secretKey: 'mykey',
+      },
+    );
 
-    const response = this.appService.startWorker(workerDefinition)
+    const response = this.appService.startWorker(workerDefinition);
     return response;
   }
 
@@ -37,10 +51,12 @@ export class AppController {
   @Get('results/:stream_name')
   results(@Param('stream_name') streamName: string): object {
     try {
-      return { data: this.datastore.get(streamName) }
+      return { data: this.datastore.get(streamName) };
     } catch (e) {
-      throw new NotFoundException(e, `Results for ${streamName} queried, but no such datastore entries available.`)
+      throw new NotFoundException(
+        e,
+        `Results for ${streamName} queried, but no such datastore entries available.`,
+      );
     }
   }
-
 }

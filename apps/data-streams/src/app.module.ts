@@ -11,7 +11,7 @@ import { DataStoreProvider } from './app.datastore.provider';
 @Module({
   imports: [
     ConfigModule.forRoot({ ignoreEnvFile: true }),
-    LoggerModule.forRoot()
+    LoggerModule.forRoot(),
   ],
   controllers: [AppController, TcpController],
   providers: [
@@ -22,7 +22,7 @@ import { DataStoreProvider } from './app.datastore.provider';
       useFactory: WorkerConnectionFactory.create,
       inject: [Config],
     },
-    DataStoreProvider
-  ]
+    DataStoreProvider,
+  ],
 })
-export class AppModule { }
+export class AppModule {}

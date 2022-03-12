@@ -13,7 +13,7 @@ import { WorkerService } from './worker.service';
   imports: [
     ConfigModule.forRoot({ ignoreEnvFile: true }),
     LoggerModule.forRoot(),
-    HttpModule
+    HttpModule,
   ],
   controllers: [WorkerController],
   providers: [
@@ -25,7 +25,7 @@ import { WorkerService } from './worker.service';
       inject: [Config],
     },
     DataStreamsService,
-    AdapterFactory
+    AdapterFactory,
   ],
 })
-export class WorkerModule { }
+export class WorkerModule {}

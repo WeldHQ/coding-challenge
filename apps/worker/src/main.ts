@@ -7,19 +7,21 @@ import { ConfigService } from '@nestjs/config';
 import { Config } from 'apps/util/config.service';
 
 async function bootstrap() {
-  const logger: Logger = LoggerFactory.createLogger('main')
-  const config = new Config(new ConfigService())
+  const logger: Logger = LoggerFactory.createLogger('main');
+  const config = new Config(new ConfigService());
 
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     WorkerModule,
     {
       transport: Transport.TCP,
-      options: { host: '0.0.0.0', port: config.WORKER_TCP_PORT }
+      options: { host: '0.0.0.0', port: config.WORKER_TCP_PORT },
     },
   );
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useLogger(logger);
-  await app.listen(() => { logger.log(`Worker started. Listening on port: ${config.WORKER_TCP_PORT}`) });
+  await app.listen(() => {
+    logger.log(`Worker started. Listening on port: ${config.WORKER_TCP_PORT}`);
+  });
 }
 
 bootstrap();

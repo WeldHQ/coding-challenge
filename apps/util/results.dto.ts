@@ -1,53 +1,57 @@
-import { IsDefined, IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
+import {
+  IsDefined,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+} from 'class-validator';
 
 export class ResultsDto {
-
   @IsDefined()
   @IsNotEmpty()
   @IsString()
-  readonly adapter: string
+  readonly adapter: string;
 
   @IsDefined()
   @IsNotEmpty()
-  readonly payload: PayloadInterface
+  readonly payload: PayloadInterface;
 
   @IsDefined()
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
-  readonly timestamp: Number = Math.floor(Date.now() / 1000)
+  readonly timestamp: number = Math.floor(Date.now() / 1000);
 
   constructor(adapter: string, payload: Payload) {
-    this.adapter = adapter
-    this.payload = payload
+    this.adapter = adapter;
+    this.payload = payload;
   }
-
 }
 
 interface PayloadInterface {
-  id: string
-  filename: string
-  rawData?: object
+  id: string;
+  filename: string;
+  rawData?: object;
 }
 
 export class Payload implements PayloadInterface {
+  @IsDefined()
+  @IsNotEmpty()
+  @IsString()
+  public id: string;
 
   @IsDefined()
   @IsNotEmpty()
   @IsString()
-  public id: string
+  public filename: string;
 
-  @IsDefined()
-  @IsNotEmpty()
-  @IsString()
-  public filename: string
-
-  public rawData?: object
+  public rawData?: object;
 
   constructor(id: string, filename: string, rawData?: object) {
-    this.id = id
-    this.filename = filename
-    if (rawData) { this.rawData = rawData }
+    this.id = id;
+    this.filename = filename;
+    if (rawData) {
+      this.rawData = rawData;
+    }
   }
-
 }
