@@ -1,17 +1,22 @@
-import { Controller, Get, UseFilters } from '@nestjs/common';
+import { Controller, Get, Logger, NotFoundException, Param, UseFilters } from '@nestjs/common';
 import { Response } from 'apps/util/response.dto';
 import { StreamDescriptionDto } from 'apps/util/streamDescription.dto';
+import { LoggerFactory } from 'apps/util/util.logger.factory';
 import { HttpExceptionsFilter } from '../../util/httpExceptions.filter';
+import { DataStoreProvider } from './app.datastore.provider';
 import { AppService } from './app.service';
 
 @Controller('private')
 @UseFilters(HttpExceptionsFilter)
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+
+  private readonly logger: Logger = LoggerFactory.createLogger(AppController.name)
+
+  constructor(private readonly appService: AppService, private readonly datastore: DataStoreProvider) { }
 
   @Get('start')
   startWorker(): Promise<Response> {
-    // const workerDefinition = new WorkerConfigDto("MOCK", 10000, 3000)
+    // const workerDefinition = new StreamDescriptionDto("MOCK", 10000, 3000)
 
     const workerDefinition = new StreamDescriptionDto(
       'IQAIR_DAILY',

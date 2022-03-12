@@ -6,13 +6,8 @@ export class MockAdapter extends Adapter {
 
     protected readonly logger: Logger = LoggerFactory.createLogger(MockAdapter.name)
 
-    async fetch(): Promise<MockResponse> {
+    async fetch(): Promise<object> {
         this.logger.debug("Fetching new data from Mock Adapter.")
         return { status: true, data: [] }
     }
-}
-
-interface MockResponse {
-    status: boolean
-    data: Array<string>
 }

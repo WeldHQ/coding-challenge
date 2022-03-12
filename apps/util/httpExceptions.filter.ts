@@ -4,19 +4,25 @@ import {
     ArgumentsHost,
     HttpException,
     HttpStatus,
+    Logger,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { Config } from './config.service';
+import { LoggerFactory } from './util.logger.factory';
 
 @Catch()
 export class HttpExceptionsFilter implements ExceptionFilter {
 
+    private readonly logger: Logger = LoggerFactory.createLogger(HttpExceptionsFilter.name)
+
+
     constructor(private readonly conf: Config, private readonly httpAdapterHost: HttpAdapterHost) { }
 
-    catch(exception: unknown, host: ArgumentsHost): void {
+    catch(exception: any, host: ArgumentsHost): void {
         if (this.conf.NODE_ENV == 'development') {
             // Makes it easier to read during development.
             // Ideally I'd swap the logger implementation but this'll do.
+            this.logger.error(exception.message)
             console.trace(exception)
         }
 
@@ -33,7 +39,7 @@ export class HttpExceptionsFilter implements ExceptionFilter {
 
         const message =
             exception instanceof HttpException
-                ? exception.getResponse()
+                ? exception.message
                 : "Internal server error"
 
         const responseBody = {

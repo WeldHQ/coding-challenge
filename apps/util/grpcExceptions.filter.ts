@@ -12,7 +12,7 @@ export class GrpcExceptionsFilter implements RpcExceptionFilter<RpcException> {
 
     constructor(private readonly conf: Config, private readonly httpAdapterHost: HttpAdapterHost) { }
 
-    catch(exception: Error, host: ArgumentsHost): Observable<any> {
+    catch(exception: any, host: ArgumentsHost): Observable<any> {
         if (this.conf.NODE_ENV == 'development') {
             // Makes it easier to read during development.
             // Ideally I'd swap the logger implementation but this'll do.
