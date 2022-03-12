@@ -1,9 +1,8 @@
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { Transport } from '@nestjs/microservices';
 import { LoggerFactory } from 'apps/util/util.logger.factory';
-import { ValidationPipe } from 'apps/util/validation.pipe';
 import { Config } from '../../util/config.service';
 import { AppModule } from './app.module';
 
@@ -13,7 +12,7 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule)
   app.useLogger(LoggerFactory.createLogger(AppModule.name));
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.connectMicroservice({
     transport: Transport.TCP,
     options: { host: '0.0.0.0', port: config.APP_TCP_PORT }

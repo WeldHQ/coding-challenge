@@ -2,9 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { WorkerModule } from './worker.module';
 import { LoggerFactory } from 'apps/util/util.logger.factory';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ValidationPipe } from 'apps/util/validation.pipe';
 import { Config } from 'apps/util/config.service';
 
 async function bootstrap() {
@@ -18,7 +17,7 @@ async function bootstrap() {
       options: { host: '0.0.0.0', port: config.WORKER_TCP_PORT }
     },
   );
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useLogger(logger);
   await app.listen(() => { logger.log(`Worker started. Listening on port: ${config.WORKER_TCP_PORT}`) });
 }
