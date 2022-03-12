@@ -55,23 +55,21 @@ I've found it useful to write down a very simple shortform work diary & Notes. I
 
 
 TODOS:
-  - da saznam kako rade testovi ovi
-  - Swagger api docs https://docs.nestjs.com/openapi/introduction
-  - add a pretty hero png ajncer?
-  - have a response facade on ds app tako da ne vracamo odgovore iz workers
-  - da results bude persistant across restarts
+  - Figure out how tests and specs work in NestJS.
+  - VSCode should do a better job linting and formatting. It seems that yarn command doesn't use the same settings as VSC.
+  - Figure out how to integrate and build [Swagger api docs](https://docs.nestjs.com/openapi/introduction)
+  - Add a pretty hero png Nico illustrated
+  - Should add a response facade on endpoints considered semi-public instead of returning raw worker responses.
+  - Results could be persistent across restart with the simple use of NestJS cache module.
+  - Figure out how NestJS releases work. It seems there is more to it than compiling and running.
 
 QA: 
-  - kad samo startujem worker, puca. vrv kad odradi statup event treba catch
 
 WOULDBENICES:
-  - worker config via validated types
-  - paginacija
-  - Postman export
-  - use cron definition sent by the client `https://docs.nestjs.com/techniques/task-scheduling#dynamic-schedule-module-api`
-  - use iso8601 tz dates instead of timestamps
-  - inconsistency in naming of classes, files and folders
-  - DTO validation is a bit repetitive, needs to check if sufficient
+  - Worker config via validated types
+  - Results API pagination
+  - Use iso8601+tz Date objects instead of timestamps
+  - Inconsistency in naming of classes, files and folders
 
 MAJOR ISSUES:
   - Figure out the exact difference in throwing behaviour between async and sync functions.

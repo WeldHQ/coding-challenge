@@ -181,6 +181,8 @@ As written above, I wanted push the idea further. I can easily envision that a s
 
 V2 would be a production-grade application, with multitenancy, agnostic workers, specialized workers, advanced error recovery, fanout for other internal processors like Athena or data-lakes, raw data storage, ability to version and re-parse data, capacity planning and spike handling, history/compliance log, error reports, over-the-air stream config updates, data-streams sharding.
 
+We could also employ a [CRON definition for streams](https://docs.nestjs.com/techniques/task-scheduling#dynamic-schedule-module-api) sent by the client, instead of seconds-based timeout. It would fit better into a database.
+
 ![V2 Architecture overview](./v2-architecture-overview.png)
 ![V2 Database structure](./v2-database-ump.png)
 
