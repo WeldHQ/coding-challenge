@@ -34,4 +34,13 @@ export class AppController {
     return this.appService.stopWorker();
   }
 
+  @Get('results/:stream_name')
+  results(@Param('stream_name') streamName: string): object {
+    try {
+      return { data: this.datastore.get(streamName) }
+    } catch (e) {
+      throw new NotFoundException(e, `Results for ${streamName} queried, but no such datastore entries available.`)
+    }
+  }
+
 }
