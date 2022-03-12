@@ -16,7 +16,7 @@ export class AppService {
   async startWorker(streamDescription: WorkerConfigDto) {
     this.streamDescription = streamDescription
     this.logger.debug(`Sending a start request to the worker: ${streamDescription.adapter}`)
-    const success: Observable<boolean> = this.worker.send('start', streamDescription).pipe(timeout(5000));
+    const success: Observable<object> = this.worker.send('start', streamDescription).pipe(timeout(5000));
     const result = await lastValueFrom(success)
     return result
   }
@@ -27,7 +27,7 @@ export class AppService {
 
   async stopWorker() {
     this.logger.debug(`Sending a stop request to the worker.`)
-    const success: Observable<boolean> = this.worker.send('stop', {}).pipe(timeout(5000));
+    const success: Observable<object> = this.worker.send('stop', {}).pipe(timeout(5000));
     const result = await lastValueFrom(success)
     return result
   }

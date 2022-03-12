@@ -9,7 +9,7 @@ export class AppController {
   constructor(private readonly appService: AppService) { }
 
   @Get("start")
-  async startWorker(): Promise<string> {
+  startWorker(): object {
     const workerDefinition = new WorkerConfigDto(
       "IQAIR_DAILY",
       300000, // 5 minutes
@@ -18,14 +18,13 @@ export class AppController {
       // "secret_key": "mykey",
     )
 
-    const response = await this.appService.startWorker(workerDefinition)
-    return JSON.stringify(response);
+    const response = this.appService.startWorker(workerDefinition)
+    return response;
   }
 
   @Get("stop")
-  async stopWorker(): Promise<string> {
-    const response = await this.appService.stopWorker()
-    return JSON.stringify(response);
+  stopWorker(): object {
+    return this.appService.stopWorker();
   }
 
 }
