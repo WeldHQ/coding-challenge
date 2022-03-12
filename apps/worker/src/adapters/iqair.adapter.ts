@@ -33,7 +33,7 @@ export class IQAirAdapter extends Adapter {
     this.httpService = httpService;
   }
 
-  async fetch(): Promise<object> {
+  async fetch(): Promise<Record<string, unknown>> {
     this.logger.debug('Fetching new data from IQAir.');
 
     const observable = this.httpService
@@ -43,15 +43,6 @@ export class IQAirAdapter extends Adapter {
 
     const response = await lastValueFrom<AxiosResponse<any, any>>(observable);
 
-    return response;
+    return response.data;
   }
-}
-
-interface IQAirResponse {
-  status: string;
-  data: IQAirResponseData;
-}
-
-interface IQAirResponseData {
-  message: string;
 }

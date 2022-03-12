@@ -21,6 +21,7 @@ export class GrpcExceptionsFilter implements RpcExceptionFilter<RpcException> {
     private readonly httpAdapterHost: HttpAdapterHost,
   ) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   catch(exception: any, host: ArgumentsHost): Observable<any> {
     if (this.conf.NODE_ENV == 'development') {
       // Makes it easier to read during development.

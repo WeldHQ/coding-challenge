@@ -29,7 +29,7 @@ export class TcpController {
   }
 
   @EventPattern('results')
-  results(@Body() results: ResultsDto): object {
+  results(@Body() results: ResultsDto): Record<string, unknown> {
     this.datastore.append(results.adapter, results.payload.rawData);
     return { success: true, message: 'Accepted the payload.' };
   }

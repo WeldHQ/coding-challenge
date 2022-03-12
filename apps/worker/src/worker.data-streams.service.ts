@@ -11,9 +11,9 @@ export class DataStreamsService implements OnModuleInit {
     DataStreamsService.name,
   );
 
-  constructor(@Inject('DATA-STREAMS') private dataStreams: ClientProxy) { }
+  constructor(@Inject('DATA-STREAMS') private dataStreams: ClientProxy) {}
 
-  async emitResults(streamName: string, results: object) {
+  async emitResults(streamName: string, results: Record<string, unknown>) {
     this.logger.log('Posting new results to data-streams.');
     const resultsDto = new ResultsDto(
       streamName,
@@ -35,8 +35,10 @@ export class DataStreamsService implements OnModuleInit {
       const result = await lastValueFrom(success);
       return result;
     } catch (e) {
-      this.logger.debug(e)
-      this.logger.debug(`The liveness announce message could not be sent to data-streams.`)
+      this.logger.debug(e);
+      this.logger.debug(
+        `The liveness announce message could not be sent to data-streams.`,
+      );
     }
   }
 

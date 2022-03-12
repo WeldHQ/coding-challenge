@@ -49,7 +49,7 @@ export class AppController {
   }
 
   @Get('results/:stream_name')
-  results(@Param('stream_name') streamName: string): object {
+  results(@Param('stream_name') streamName: string): Record<string, unknown> {
     try {
       return { data: this.datastore.get(streamName) };
     } catch (e) {

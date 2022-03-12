@@ -31,7 +31,7 @@ export class ResultsDto {
 interface PayloadInterface {
   id: string;
   filename: string;
-  rawData?: object;
+  rawData?: Record<string, unknown>;
 }
 
 export class Payload implements PayloadInterface {
@@ -45,9 +45,9 @@ export class Payload implements PayloadInterface {
   @IsString()
   public filename: string;
 
-  public rawData?: object;
+  public rawData?: Record<string, unknown>;
 
-  constructor(id: string, filename: string, rawData?: object) {
+  constructor(id: string, filename: string, rawData?: Record<string, unknown>) {
     this.id = id;
     this.filename = filename;
     if (rawData) {

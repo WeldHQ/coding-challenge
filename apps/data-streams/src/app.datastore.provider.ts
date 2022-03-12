@@ -6,7 +6,7 @@ export class DataStoreProvider {
   private readonly logger: Logger = LoggerFactory.createLogger(
     DataStoreProvider.name,
   );
-  private readonly datastore: object = {};
+  private readonly datastore: Record<string, Array<Record<string, any>>> = {};
 
   get(streamName: string) {
     if (!this.datastore.hasOwnProperty(streamName)) {

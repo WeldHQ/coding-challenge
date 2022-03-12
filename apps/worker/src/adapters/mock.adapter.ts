@@ -7,7 +7,7 @@ export class MockAdapter extends Adapter {
     MockAdapter.name,
   );
 
-  async fetch(): Promise<object> {
+  async fetch(): Promise<Record<string, unknown>> {
     this.logger.debug('Fetching new data from Mock Adapter.');
     return { status: true, data: [] };
   }
