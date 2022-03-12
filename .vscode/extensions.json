@@ -3,6 +3,8 @@
         "mutantdino.resourcemonitor",
         "mikestead.dotenv",
         "eamodio.gitlens",
-        "AbhijoyBasak.nestjs-files"
+        "abhijoybasak.nestjs-files",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
     ]
 }
