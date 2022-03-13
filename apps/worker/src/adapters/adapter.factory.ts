@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { StreamDescriptionDto } from '../../../util/streamDescription.dto';
+import { AdapterType } from './adapterType.enum';
 import { IQAirAdapter } from './iqair.adapter';
 import { MockAdapter } from './mock.adapter';
 
@@ -10,9 +11,9 @@ export class AdapterFactory {
 
   create(streamDescription: StreamDescriptionDto) {
     switch (streamDescription.adapter) {
-      case AllowedAdapters.IQAIR_DAILY:
+      case AdapterType.IQAIR_DAILY:
         return new IQAirAdapter(streamDescription, this.httpService);
-      case AllowedAdapters.MOCK:
+      case AdapterType.MOCK:
         return new MockAdapter(streamDescription);
       default:
         throw new Error(
@@ -20,9 +21,4 @@ export class AdapterFactory {
         );
     }
   }
-}
-
-export declare enum AllowedAdapters {
-  IQAIR_DAILY = 'IQAIR_DAILY',
-  MOCK = 'MOCK',
 }

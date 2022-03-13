@@ -7,7 +7,10 @@ import {
   IsString,
   IsUUID,
 } from 'class-validator';
-import { AllowedAdapters } from '../worker/src/adapters/adapter.factory';
+import {
+  AdapterType,
+  AdapterTypes,
+} from '../worker/src/adapters/adapterType.enum';
 
 export class Payload {
   /**
@@ -52,8 +55,8 @@ export class ResultsDto {
   @IsDefined()
   @IsNotEmpty()
   @IsString()
-  @IsEnum(AllowedAdapters)
-  readonly adapter: AllowedAdapters;
+  @IsEnum(AdapterTypes.getAll())
+  readonly adapter: AdapterType;
 
   /**
    * A standardized envelope used for communicating the lcoation of the raw data.
@@ -71,7 +74,7 @@ export class ResultsDto {
   @IsPositive()
   readonly timestamp: number = Math.floor(Date.now() / 1000);
 
-  constructor(adapter: AllowedAdapters, payload: Payload) {
+  constructor(adapter: AdapterType, payload: Payload) {
     this.adapter = adapter;
     this.payload = payload;
   }

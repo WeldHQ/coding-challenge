@@ -14,7 +14,7 @@ import { AppService } from './app.service';
 import { Config } from '../../util/config.service';
 import { HttpException as InternalHttpException } from '../../util/http.exception.dto';
 import { ApiExtraModels, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AllowedAdapters } from '../../worker/src/adapters/adapter.factory';
+import { AdapterType } from '../../worker/src/adapters/adapterType.enum';
 
 @Controller('private')
 @ApiExtraModels(InternalHttpException)
@@ -42,7 +42,7 @@ export class AppController {
   })
   startWorker(): Promise<Response> {
     const workerDefinition = new StreamDescriptionDto(
-      AllowedAdapters.IQAIR_DAILY,
+      AdapterType.IQAIR_DAILY,
       300000, // 5 minutes
       30000, // 30 seconds
       this.config.IQAIR_CONFIG,

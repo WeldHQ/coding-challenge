@@ -1,20 +1,23 @@
 import {
   IsDefined,
-  IsEnum,
+  IsIn,
   IsNotEmpty,
   IsNumber,
   IsPositive,
   IsString,
   Min,
 } from 'class-validator';
-import { AllowedAdapters } from '../worker/src/adapters/adapter.factory';
+import {
+  AdapterType,
+  AdapterTypes,
+} from '../worker/src/adapters/adapterType.enum';
 
 export class StreamDescriptionDto {
   @IsDefined()
   @IsNotEmpty()
   @IsString()
-  @IsEnum(AllowedAdapters)
-  readonly adapter: AllowedAdapters;
+  @IsIn(AdapterTypes.getAll())
+  readonly adapter: AdapterType;
 
   @IsDefined()
   @IsNotEmpty()
@@ -33,7 +36,7 @@ export class StreamDescriptionDto {
   readonly config?: any;
 
   constructor(
-    adapter: AllowedAdapters,
+    adapter: AdapterType,
     interval: number,
     timeout: number,
     config?: any,
