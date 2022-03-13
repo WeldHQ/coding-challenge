@@ -4,6 +4,7 @@ import { Payload, ResultsDto } from '../../util/results.dto';
 import { Response } from '../../util/response.dto';
 import { LoggerFactory } from '../../util/util.logger.factory';
 import { lastValueFrom, Observable, timeout } from 'rxjs';
+import { AllowedAdapters } from './adapters/adapter.factory';
 
 @Injectable()
 export class DataStreamsService implements OnModuleInit {
@@ -13,7 +14,10 @@ export class DataStreamsService implements OnModuleInit {
 
   constructor(@Inject('DATA-STREAMS') private dataStreams: ClientProxy) {}
 
-  async emitResults(streamName: string, results: Record<string, unknown>) {
+  async emitResults(
+    streamName: AllowedAdapters,
+    results: Record<string, unknown>,
+  ) {
     this.logger.log('Posting new results to data-streams.');
     const resultsDto = new ResultsDto(
       streamName,

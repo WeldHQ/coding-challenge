@@ -1,19 +1,20 @@
 import {
   IsDefined,
-  IsIn,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsPositive,
   IsString,
   Min,
 } from 'class-validator';
+import { AllowedAdapters } from '../worker/src/adapters/adapter.factory';
 
 export class StreamDescriptionDto {
   @IsDefined()
   @IsNotEmpty()
   @IsString()
-  @IsIn(['IQAIR_DAILY', 'MOCK'])
-  readonly adapter: string;
+  @IsEnum(AllowedAdapters)
+  readonly adapter: AllowedAdapters;
 
   @IsDefined()
   @IsNotEmpty()
@@ -32,7 +33,7 @@ export class StreamDescriptionDto {
   readonly config?: any;
 
   constructor(
-    adapter: string,
+    adapter: AllowedAdapters,
     interval: number,
     timeout: number,
     config?: any,

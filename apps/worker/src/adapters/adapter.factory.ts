@@ -10,9 +10,9 @@ export class AdapterFactory {
 
   create(streamDescription: StreamDescriptionDto) {
     switch (streamDescription.adapter) {
-      case 'IQAIR_DAILY':
+      case AllowedAdapters.IQAIR_DAILY:
         return new IQAirAdapter(streamDescription, this.httpService);
-      case 'MOCK':
+      case AllowedAdapters.MOCK:
         return new MockAdapter(streamDescription);
       default:
         throw new Error(
@@ -20,4 +20,9 @@ export class AdapterFactory {
         );
     }
   }
+}
+
+export declare enum AllowedAdapters {
+  IQAIR_DAILY = 'IQAIR_DAILY',
+  MOCK = 'MOCK',
 }

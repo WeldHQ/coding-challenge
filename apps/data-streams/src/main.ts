@@ -19,7 +19,9 @@ async function bootstrap() {
     options: { host: '0.0.0.0', port: config.APP_TCP_PORT },
   });
 
-  startSwagger(app);
+  if (config.NODE_ENV === 'development') {
+    startSwagger(app);
+  }
 
   await app.startAllMicroservices();
   await app.listen(config.APP_HTTP_PORT, () => {
@@ -33,10 +35,17 @@ function startSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
     .setTitle('Weld Challenge')
     .setDescription(
-      'Description of an API that manager the remote worker component.',
+      `Description of an API that manages the lifecycle of 
+      the remote worker component.<br><br>It serves the purpose of 
+      defining and starting a stream of data, as well as handing 
+      off the results to the client.`,
+    )
+    .setContact(
+      'Marko Mitranić',
+      'https://homullus.com/',
+      'marko.mitranic@gmail.com',
     )
     .setVersion('1.0')
-    .addTag('data-streams')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
