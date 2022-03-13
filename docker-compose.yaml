@@ -6,9 +6,9 @@ services:
       dockerfile: dev.Dockerfile
     command: 'tail -f /dev/null'
     environment:
-      WORKER_HOST: ${WORKER_HOST}
+      WORKER_HOST: worker
       WORKER_TCP_PORT: ${WORKER_TCP_PORT}
-      APP_HOST: ${APP_HOST}
+      APP_HOST: worker
       APP_HTTP_PORT: ${APP_HTTP_PORT}
       APP_TCP_PORT: ${APP_TCP_PORT}
       IQAIR_API_KEY: ${IQAIR_API_KEY}
@@ -28,7 +28,7 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     healthcheck:
-      test: ['CMD', 'curl', 'http://weld_minio:9000']
+      test: [ 'CMD', 'curl', 'http://weld_minio:9000' ]
       interval: 30s
       timeout: 10s
       start_period: 15s
@@ -60,7 +60,7 @@ services:
           '--dbname=${POSTGRESQL_DB}',
           '--quiet',
           '--no-align',
-          '--tuples-only',
+          '--tuples-only'
         ]
       interval: 30s
       timeout: 10s

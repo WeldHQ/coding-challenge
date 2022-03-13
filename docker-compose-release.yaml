@@ -1,0 +1,44 @@
+services:
+
+  data_streams:
+    container_name: weld_data_streams
+    build:
+      context: .
+      dockerfile: release.Dockerfile
+      args:
+        APP_NAME: "data-streams"
+    restart: always
+    environment:
+      WORKER_HOST: worker
+      WORKER_TCP_PORT: ${WORKER_TCP_PORT}
+      APP_HOST: data_streams
+      APP_HTTP_PORT: ${APP_HTTP_PORT}
+      APP_TCP_PORT: ${APP_TCP_PORT}
+      IQAIR_API_KEY: ${IQAIR_API_KEY}
+    ports:
+      - ${APP_HTTP_PORT}:${APP_HTTP_PORT}
+    networks:
+      - weld
+
+  worker:
+    container_name: weld_worker
+    build:
+      context: .
+      dockerfile: release.Dockerfile
+      args:
+        APP_NAME: "worker"
+    restart: always
+    environment:
+      WORKER_HOST: worker
+      WORKER_TCP_PORT: ${WORKER_TCP_PORT}
+      APP_HOST: data_streams
+      APP_HTTP_PORT: ${APP_HTTP_PORT}
+      APP_TCP_PORT: ${APP_TCP_PORT}
+      IQAIR_API_KEY: ${IQAIR_API_KEY}
+    networks:
+      - weld
+
+networks:
+  weld:
+    name: weld
+    driver: bridge

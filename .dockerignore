@@ -1,0 +1,14 @@
+# Build artifacts
+node_modules
+.tmp
+coverage
+dist
+.env
+
+# Project pieces that have no business being in the release
+.vscode
+.git
+.gitignore
+*.Dockerfile
+docker-compose*
+README.md
