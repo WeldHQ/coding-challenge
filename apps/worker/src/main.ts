@@ -1,15 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { WorkerModule } from './worker.module';
-import { LoggerFactory } from '../../util/util.logger.factory';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger } from 'nestjs-pino';
 import { ConfigService } from '@nestjs/config';
 import { Config } from '../../util/config.service';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const logger: Logger = LoggerFactory.createLogger('main');
   const config = new Config(new ConfigService());
-
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     WorkerModule,
     {
@@ -17,11 +15,10 @@ async function bootstrap() {
       options: { host: '0.0.0.0', port: config.WORKER_TCP_PORT },
     },
   );
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  const logger: Logger = app.get(Logger);
   app.useLogger(logger);
-  await app.listen(() => {
-    logger.log(`Worker started. Listening on port: ${config.WORKER_TCP_PORT}`);
-  });
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  await app.listen();
 }
 
 bootstrap();
