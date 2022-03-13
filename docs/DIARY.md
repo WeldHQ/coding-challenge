@@ -63,20 +63,21 @@ I've found it useful to write down a very simple shortform work diary & Notes. I
   - Needs a newer nestjs version. Updating... LEEEEROY JENKINS
   - I've lost the logger after the update. -.-
   - Ha, it actually worked fine, i just had to restart the webpack watcher
+  - Ouch, lost like an hour figuring out [how enums exports work](https://stackoverflow.com/questions/50564756/exporting-enum-from-typescript-type-definition-file). TS really suffers from being a JS-baby.
+- Jest started failing, turns oout its only due to me not having updated it when I installed Swagger
 
 TODOS:
 
-- Add a pretty hero png Nico illustrated
-- Results could be persistent across restart with the simple use of NestJS cache module.
 - Figure out how NestJS releases work. It seems there is more to it than compiling and running.
-- da napisem kako se swagger pali i kako se projekat pali u readme
-
-QA:
+- Append Readme with a link to the docs, instructions on releasing, testing and dev as well as Swagger usage.
+- Add a pretty hero png Nico illustrated
 
 WOULDBENICES:
 
 - Results API pagination
 - Use iso8601+tz Date objects instead of timestamps
+- Results could be persistent across restart with the simple use of NestJS cache module.
+- The start API endpoint can be used to actually define the stream
 - Inconsistency in naming of classes, files and folders
 - Had to force node env on jest. Don't know why.
 - Have parametrized logger level control
