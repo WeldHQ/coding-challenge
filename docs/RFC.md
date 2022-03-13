@@ -14,9 +14,6 @@ A stream-worker pair with an adapter for reading data from IQAir.
 
 - [Summary](#summary)
 - [Motivation](#motivation)
-- [How to use](#how-to-use)
-  - [Development](#development)
-  - [Runtime](#runtime)
 - [Design and implementation](#design-and-implementation)
   - [Work in Iterations](#work-in-iterations)
   - [Reasoning on Supporting Services:](#reasoning-on-supporting-services)
@@ -29,26 +26,6 @@ A stream-worker pair with an adapter for reading data from IQAir.
 # Motivation
 
 One of our customers wants us to help them build a pipeline for [IQAir API](https://www.iqair.com/us/commercial/air-quality-monitors/airvisual-platform/api). They wish us to pull the data regarding a given point into our data-warehouse on a regular basis.
-
-# How to use
-
-## Development
-I will set up a `docker-compose` orchestrated project that will spawn the supporting services as well as the two microservices. Below are some common useful commands during development:
-
-```bash
-// Run the project
-./scripts/run-dev.sh
-// Shell into the container (or even better, "Attach" via VSCode)
-docker exec -ti weld_worker bash
-
-// Run linting, tests, start
-yarn lint
-yarn test
-yarn start
-yarn start worker
-```
-
-## Runtime
 
 # Design and implementation
 

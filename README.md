@@ -1,11 +1,66 @@
 # Welcome to Welds coding-challenge
 
+- [Welcome to Welds coding-challenge](#welcome-to-welds-coding-challenge)
+  - [Introduction](#introduction)
+- [👩‍🔬 Challenge Accepted](#-challenge-accepted)
+  - [How to use](#how-to-use)
+    - [Release](#release)
+    - [Development](#development)
+  - [Wouldbenices & Regrets](#wouldbenices--regrets)
+- [Challenge](#challenge)
+    - [Steps in challenge](#steps-in-challenge)
+  - [How we evaluate](#how-we-evaluate)
+  - [Project structure](#project-structure)
+    - [data-streams:](#data-streams)
+    - [worker:](#worker)
 ## Introduction
 Here at Weld we use [NestJS](https://nestjs.com/) for our applications. So this project also reflects that. On our front-end we use NextJS and GraphQL. For simplicity we have used the monorepo structure from NestJS.
 
 Fork this repository and create your own repository to get started.
 
-## Challenge
+# 👩‍🔬 Challenge Accepted
+I've explained my reasoning thoroughly as part of the [RFC document](./docs/RFC.md). It should help asnwer some questions related to architecture, robustness and future prospects.
+
+I did my best to treat the project like a real thing, not "just a challenge".
+
+## How to use
+The project assumes you have access to a docker-capable machine.
+
+### Release
+- Start the `docker-compose` project by running `./scripts/run-release.sh`. The release will take some time to build. 
+- When everything is built, up and running, you should be able to visit `http://localhost:3000/api` where the Swagger docs are hosted.
+- Open the newly created `.env` file and populate the `IQAIR_API_KEY` environment variable. Restart the project after doing so.
+
+### Development
+For development, I personally heavily rely on VSCode's Remote functionality. I use a separate docker-compose project:
+```bash
+# Run the project
+./scripts/run-dev.sh
+# Shell into the container (or even better, "Attach" via VSCode)
+docker exec -ti weld_worker bash
+
+# Run linting, tests, start
+yarn lint
+yarn test
+yarn start
+yarn start worker
+```
+
+## Wouldbenices & Regrets
+
+- The start API endpoint can be used to actually define the stream (apiKey, interval, timeout)
+- Results API pagination
+- Use ISO8601+tz Date objects instead of timestamps
+- Results could be persistent across restart with the simple use of NestJS cache module.
+- Inconsistency in naming of classes, files and folders
+- Had to force node env on jest. Don't know why.
+- Have parametrized logger level control
+- Should add a response facade on endpoints considered semi-public instead of returning raw worker responses.
+- I'd keep Swagger docs stopped in releases, but since this is an interview, it makes sense to leave them
+- I feel strongly about keeping config separate. It was not a good practice for me to merge them.
+
+--
+# Challenge
 One of our customers wants us to help them build a pipeline for an API (select whichever you want from [Public APIs](https://github.com/public-apis/public-apis)). And they want us to setup a new data-pipeline for them to get information out and into their current data-warehouse.
 
 To accomplish this you will build two services:

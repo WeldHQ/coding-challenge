@@ -6,6 +6,7 @@
         "abhijoybasak.nestjs-files",
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-        "Orta.vscode-jest"
+        "orta.vscode-jest",
+        "yzhang.markdown-all-in-one"
     ]
 }
