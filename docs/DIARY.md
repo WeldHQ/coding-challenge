@@ -58,27 +58,29 @@ I've found it useful to write down a very simple shortform work diary & Notes. I
 - Working on setting up some basic e2e test cases
   - This guide helped [A LOT](https://stackoverflow.com/questions/57315466/e2e-testing-a-microservice-in-nest)
 - Fighting with worker tests where I have to use the same connection twice
+  - IDK, i gave up. Need to do things that bring actual value.
+- Lets see how [Swagger api docs](https://docs.nestjs.com/openapi/introduction) works.
+  - Needs a newer nestjs version. Updating... LEEEEROY JENKINS
+  - I've lost the logger after the update. -.-
+  - Ha, it actually worked fine, i just had to restart the webpack watcher
 
 TODOS:
 
-- Figure out how tests and specs work in NestJS.
-- VSCode should do a better job linting and formatting. It seems that yarn command doesn't use the same settings as VSC.
-- Figure out how to integrate and build [Swagger api docs](https://docs.nestjs.com/openapi/introduction)
 - Add a pretty hero png Nico illustrated
-- Should add a response facade on endpoints considered semi-public instead of returning raw worker responses.
 - Results could be persistent across restart with the simple use of NestJS cache module.
 - Figure out how NestJS releases work. It seems there is more to it than compiling and running.
+- da napisem kako se swagger pali i kako se projekat pali u readme
 
 QA:
 
 WOULDBENICES:
 
-- Worker config via validated types
 - Results API pagination
 - Use iso8601+tz Date objects instead of timestamps
 - Inconsistency in naming of classes, files and folders
 - Had to force node env on jest. Don't know why.
 - Have parametrized logger level control
+- Should add a response facade on endpoints considered semi-public instead of returning raw worker responses.
 
 MAJOR ISSUES:
 
