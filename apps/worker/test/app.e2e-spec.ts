@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import { WorkerModule } from '../src/worker.module';
 import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
 import { lastValueFrom, Observable } from 'rxjs';
+import { AdapterType } from '../src/adapters/adapterType.enum';
 
 describe('WorkerController (e2e)', () => {
   let app: INestApplication;
@@ -48,7 +49,7 @@ describe('WorkerController (e2e)', () => {
 
   it('[Message] start starts a worker', async (done) => {
     const message = {
-      adapter: 'MOCK',
+      adapter: AdapterType.MOCK,
       interval: 10000,
       timeout: 3000,
     };

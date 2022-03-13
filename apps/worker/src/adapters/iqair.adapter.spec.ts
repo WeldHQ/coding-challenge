@@ -5,6 +5,7 @@ import { AxiosResponse } from 'axios';
 import { of } from 'rxjs';
 import { StreamDescriptionDto } from '../../../util/streamDescription.dto';
 import { WorkerModule } from '../worker.module';
+import { AdapterType } from './adapterType.enum';
 import { IQAirAdapter } from './iqair.adapter';
 
 describe('WorkerController', () => {
@@ -28,7 +29,7 @@ describe('WorkerController', () => {
 
   it('should throw an error with wrong credentials', async (done) => {
     const adapter = new IQAirAdapter(
-      new StreamDescriptionDto('IQAIR_DAILY', 3000, 3000, {
+      new StreamDescriptionDto(AdapterType.IQAIR_DAILY, 3000, 3000, {
         origin: 'http://api.airvisual.com',
         secretKey: 'mykey',
       }),
@@ -48,7 +49,7 @@ describe('WorkerController', () => {
 
   it('will return parsed data on success', async (done) => {
     const adapter = new IQAirAdapter(
-      new StreamDescriptionDto('IQAIR_DAILY', 3000, 3000, {
+      new StreamDescriptionDto(AdapterType.IQAIR_DAILY, 3000, 3000, {
         origin: '',
         secretKey: '',
       }),
