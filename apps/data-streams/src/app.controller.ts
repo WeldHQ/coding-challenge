@@ -72,7 +72,7 @@ export class AppController {
    * Used for fetching the stored stream results based on the unique stream handle.<br><br>
    * The endpoint is idempotent and will return an empty list in case an unknown handle is provided.
    */
-  @Get('results/:streamName')
+  @Get('results/:streamType')
   @ApiTags('results')
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
@@ -84,13 +84,13 @@ export class AppController {
     description:
       'The datastore itself is corrupt, non-responsive or unavailable.',
   })
-  results(@Param('streamName') streamName: string): Record<string, unknown> {
+  results(@Param('streamType') streamType: string): Record<string, unknown> {
     try {
-      return { data: this.datastore.get(streamName) };
+      return { data: this.datastore.get(streamType) };
     } catch (e) {
       throw new NotFoundException(
         e,
-        `Results for ${streamName} queried, but no such datastore entries available.`,
+        `Results for ${streamType} queried, but no such datastore entries available.`,
       );
     }
   }
