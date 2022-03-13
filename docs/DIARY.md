@@ -65,10 +65,10 @@ I've found it useful to write down a very simple shortform work diary & Notes. I
   - Ha, it actually worked fine, i just had to restart the webpack watcher
   - Ouch, lost like an hour figuring out [how enums exports work](https://stackoverflow.com/questions/50564756/exporting-enum-from-typescript-type-definition-file). TS really suffers from being a JS-baby.
 - Jest started failing, turns oout its only due to me not having updated it when I installed Swagger
+- Setting up releases was trickier than I initially thought. it seems that they don't embed the node_modules inside dist. Weird.
 
 TODOS:
 
-- Figure out how NestJS releases work. It seems there is more to it than compiling and running.
 - Append Readme with a link to the docs, instructions on releasing, testing and dev as well as Swagger usage.
 - Add a pretty hero png Nico illustrated
 
@@ -82,6 +82,8 @@ WOULDBENICES:
 - Had to force node env on jest. Don't know why.
 - Have parametrized logger level control
 - Should add a response facade on endpoints considered semi-public instead of returning raw worker responses.
+- I'd keep Swagger docs stopped in releases, but since this is an interview, it makes sense to leave them
+- I feel strongly about keeping config separate. It was not a good practice for me to merge them.
 
 MAJOR ISSUES:
 

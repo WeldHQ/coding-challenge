@@ -19,10 +19,7 @@ async function bootstrap() {
     options: { host: '0.0.0.0', port: config.APP_TCP_PORT },
   });
 
-  if (config.NODE_ENV === 'development') {
-    startSwagger(app);
-  }
-
+  startSwagger(app);
   await app.startAllMicroservices();
   await app.listen(config.APP_HTTP_PORT, () => {
     logger.log(
