@@ -29,8 +29,6 @@ export class AppController {
 
   @Get('start')
   startWorker(): Promise<Response> {
-    // const workerDefinition = new StreamDescriptionDto("MOCK", 10000, 3000)
-
     const workerDefinition = new StreamDescriptionDto(
       'IQAIR_DAILY',
       300000, // 5 minutes
