@@ -7,6 +7,7 @@
     - [Release](#release)
     - [Development](#development)
   - [Wouldbenices & Regrets](#wouldbenices--regrets)
+  - [Missed Opportunnities](#missed-opportunnities)
 - [Challenge](#challenge)
     - [Steps in challenge](#steps-in-challenge)
   - [How we evaluate](#how-we-evaluate)
@@ -59,6 +60,16 @@ yarn start worker
 - I'd keep Swagger docs stopped in releases, but since this is an interview, it makes sense to leave them
 - I feel strongly about keeping config separate. It was not a good practice for me to merge them.
 
+## Missed Opportunnities
+- Did not add S3 integration. While trivial to add, it is crucial for the "data must flow" aspect of the challenge.
+- Spent way too much time fiddling with typing for very little benefit. I've had lots of exprience in other typed languages but TS is a little bit different here and there, so it falls into uncanny valley territory. For example I've spent a large chunk of time on: enums, type vs interface, declares not working.
+- Spent way too much time figuring out how async throws work. They can break the whole node process, which I found very confused by.
+- If I had used NestCache interface or Redis as a MS, I could have saved some time and replaced it already.
+- There is a lot of boilerplate for such a small service. I blame this on:
+  - Me being a novice in TS
+  - Me having a goal of building a foundation for an easily-upgradeable MS down the line.
+  - Attempting to follow NestJS docs and best practices to the bone.
+  
 --
 # Challenge
 One of our customers wants us to help them build a pipeline for an API (select whichever you want from [Public APIs](https://github.com/public-apis/public-apis)). And they want us to setup a new data-pipeline for them to get information out and into their current data-warehouse.
