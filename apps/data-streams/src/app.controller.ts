@@ -1,17 +1,14 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ClientProxy, EventPattern } from '@nestjs/microservices';
+import { EventPattern } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    @Inject('WORKER_SERVICE') private client: ClientProxy,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @EventPattern('storeData')
-  async handleStartFetchingEvent(data: any) {
-    console.log('Received storeData event with data:', data.length);
+  storeData(data: object) {
+    this.appService.storeData(data);
   }
 
   @Get()
@@ -20,16 +17,17 @@ export class AppController {
   }
 
   @Get('start-fetching')
-  startFetchingData(): string {
-    const interval = 1000 * 60 * 5; // 5 minutes
-    this.client.emit('startFetching', { interval }); // 5 minutes
-    return 'Started fetching data every 5 minutes.';
+  startFetching(): string {
+    return this.appService.startFetching();
   }
 
   @Get('stop-fetching')
-  stopFetchingData(): string {
-    // Send a command to the worker service to stop fetching data
-    this.client.emit('stopFetching', {});
-    return 'Stopped fetching data.';
+  stopFetching(): string {
+    return this.appService.stopFetching();
+  }
+
+  @Get('data')
+  getData(): any[] {
+    return this.appService.getData();
   }
 }
