@@ -23,4 +23,18 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('/start-fetching (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/start-fetching')
+      .expect(200)
+      .expect('Started fetching data every 300000 milliseconds.');
+  });
+
+  it('/stop-fetching (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/stop-fetching')
+      .expect(200)
+      .expect('Stopped fetching data.');
+  });
 });

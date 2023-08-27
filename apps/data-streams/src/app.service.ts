@@ -15,8 +15,8 @@ export class AppService {
   // Send a command to the worker service to start fetching data
   startFetching(): string {
     const interval = 1000 * 60 * 5; // 5 minutes
-    this.client.emit('startFetching', { interval }); // 5 minutes
-    return 'Started fetching data every 5 minutes.';
+    this.client.emit('startFetching', { interval });
+    return `Started fetching data every ${interval} milliseconds.`;
   }
 
   // Send a command to the worker service to stop fetching data
